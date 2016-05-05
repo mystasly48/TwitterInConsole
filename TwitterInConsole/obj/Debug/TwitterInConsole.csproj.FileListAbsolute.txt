@@ -1,0 +1,1 @@
+D:\Programming\C#\Sources\TwitterInConsole\TwitterInConsole\bin\Debug\TwitterInConsole.exe.config
