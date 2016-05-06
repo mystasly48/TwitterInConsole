@@ -1,1 +1,10 @@
 D:\Programming\C#\Sources\TwitterInConsole\TwitterInConsole\bin\Debug\TwitterInConsole.exe.config
+D:\Programming\C#\Sources\TwitterInConsole\TwitterInConsole\bin\Debug\TwitterInConsole.exe
+D:\Programming\C#\Sources\TwitterInConsole\TwitterInConsole\bin\Debug\TwitterInConsole.pdb
+D:\Programming\C#\Sources\TwitterInConsole\TwitterInConsole\bin\Debug\CoreTweet.dll
+D:\Programming\C#\Sources\TwitterInConsole\TwitterInConsole\bin\Debug\Newtonsoft.Json.dll
+D:\Programming\C#\Sources\TwitterInConsole\TwitterInConsole\bin\Debug\CoreTweet.xml
+D:\Programming\C#\Sources\TwitterInConsole\TwitterInConsole\bin\Debug\Newtonsoft.Json.xml
+D:\Programming\C#\Sources\TwitterInConsole\TwitterInConsole\obj\Debug\TwitterInConsole.csprojResolveAssemblyReference.cache
+D:\Programming\C#\Sources\TwitterInConsole\TwitterInConsole\obj\Debug\TwitterInConsole.exe
+D:\Programming\C#\Sources\TwitterInConsole\TwitterInConsole\obj\Debug\TwitterInConsole.pdb
