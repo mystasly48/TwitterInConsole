@@ -22,6 +22,7 @@ namespace TwitterInConsole {
             load();
             initialSet();
 
+            //deleteTweet(10);
             readCommand();
 
             save();
@@ -119,45 +120,100 @@ namespace TwitterInConsole {
 
         // コマンドの判定
         static void command(string command) {
-            // exit
-            // help
-            // list
-            // deleteLatest 廃止
-            // add(name) => add name
-            // tweet(message) => tweet message
-            // switch(name) => switch name
-            // delete(int) => delete int
-            if (command.Contains("cls")) {
-                Console.Clear();
-            } else if (command.Contains("exit")) {
-                return;
-            } else if (command.Contains("help")) {
+            if (command.Contains("add ")) {
+                addAccount(extractParam(command, "add "));
 
-            } else if (command.Contains("list")) {
-
-            } else if (command.Contains("delete ")) {
-                extractParam(command, "delete ");
-            } else if (command.Contains("tweet ")) {
-                sendTweet(extractParam(command, "tweet "));
             } else if (command.Contains("switch ")) {
                 setAccount((extractParam(command, "switch ")));
-            } else if (command.Contains("add ")) {
-                addAccount(extractParam(command, "add "));
+
+            } else if (command.Contains("tweet ")) {
+                sendTweet(extractParam(command, "tweet "));
+
+            } else if (command.Contains("delete ")) {
+                extractParam(command, "delete "); //未実装
+
+            } else if (command.Contains("exit")) {
+                return;
+
+            } else if (command.Contains("help")) {
+                Console.WriteLine("-----");
+                Console.WriteLine("help - ヘルプを表示");
+                Console.WriteLine("exit - プログラムを終了");
+                Console.WriteLine("cls - コンソールを初期化");
+                Console.WriteLine("current - ログイン中のアカウントを表示");
+                Console.WriteLine("list - 登録されているアカウントを表示 *未実装*");
+                Console.WriteLine("add [名前] - アカウントを登録");
+                Console.WriteLine("switch [名前] - アカウントを切り替え");
+                Console.WriteLine("tweet [文字列] - 文字列をツイート");
+                Console.WriteLine("tweets [数値] - 過去ツイートを[数値]分表示（最大５０件） *未実装*");
+                Console.WriteLine("delete [数値] - [数値]前のツイートを削除（最大２００件前） *未実装*");
+                Console.WriteLine("remove [名前] - 登録されているアカウント[名前]を削除 *未実装*");
+                Console.WriteLine("media [文字列] [場所] - メディア[場所]を添付して[文字列]をツイート *未実装*");
+                Console.WriteLine("-----");
+
+            } else if (command.Contains("list")) {
+                doList();
+
+            } else if (command.Contains("current")) {
+                doCurrent();
+
+            } else if (command.Contains("cls")) {
+                Console.Clear();
+
             } else {
                 Console.WriteLine("不明なコマンドです。 help でコマンドの一覧を確認することができます。");
-            }
 
+            }
             readCommand();
         }
 
-        static void deleteTweet(int pre) {
-            
+        // 登録されているアカウントをすべて取得
+        static void doList() {
+            var accounts = settings.Twitter;
+            if (accounts.Count > 0) {
+                var result = "";
+                for (int i = 0; i < accounts.Count; i++) {
+                    result += accounts[i].Name + ", ";
+                }
+                result = result.Substring(0, result.Length - 2);
+                Console.WriteLine("登録されているアカウント: " + result);
+            } else {
+                Console.WriteLine("登録されているアカウントはありません。");
+            }
         }
 
+        // ログイン中のアカウントを取得
+        static void doCurrent() {
+            if (tokens == null) {
+                Console.WriteLine("現在アカウントにログインしていません。");
+            } else {
+                Console.WriteLine("ログイン中: " + settings.Selected);
+            }
+        }
+
+        //static void deleteTweet(int previous) {
+        //    var tweets = tokens.Statuses.UserTimeline(include_rts: true, exclude_replies: false, contributor_details: false, screen_name: "30msl", count: previous);
+        //    //var delete = tokens.Statuses.Destroy(id: 0000000000);
+
+        //    foreach (var tweet in tweets) {
+        //        Console.WriteLine(tweet.Text);
+        //        Console.WriteLine(tweet.Id);
+        //    }
+        //}
+
+        // ツイートの送信
         static void sendTweet(string msg) {
             try {
                 if (tokens == null) {
                     Console.WriteLine("アカウントの設定がされていません。");
+                    return;
+                }
+                if (msg == "") {
+                    Console.WriteLine("ツイートが入力されていません。");
+                    return;
+                }
+                if (msg.Length > 140) {
+                    Console.WriteLine("ツイートは１４０文字以内で入力してください。");
                     return;
                 }
                 tokens.Statuses.Update(status: msg);
@@ -168,16 +224,17 @@ namespace TwitterInConsole {
             }
         }
 
+        // y/n で確認を取る
         static bool confirm() {
-            //while (true) {
-            //    Console.WriteLine("本当に終了しますか？ [y/n]");
-            //    var answer = read();
-            //    if (answer == "y" || answer == "yes") {
-            //        return;
-            //    } else if (answer == "n" || answer == "no") {
-            //        break;
-            //    }
-            //}
+            while (true) {
+                Console.WriteLine("本当に終了しますか？ [y/n]");
+                var answer = read();
+                if (answer == "y" || answer == "yes") {
+                    return true;
+                } else if (answer == "n" || answer == "no") {
+                    break;
+                }
+            }
             return false;
         }
 
