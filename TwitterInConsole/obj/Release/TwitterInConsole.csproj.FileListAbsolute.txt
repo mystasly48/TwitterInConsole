@@ -7,3 +7,4 @@ D:\Programming\C#\Sources\TwitterInConsole\TwitterInConsole\bin\Release\CoreTwee
 D:\Programming\C#\Sources\TwitterInConsole\TwitterInConsole\bin\Release\Newtonsoft.Json.xml
 D:\Programming\C#\Sources\TwitterInConsole\TwitterInConsole\obj\Release\TwitterInConsole.exe
 D:\Programming\C#\Sources\TwitterInConsole\TwitterInConsole\obj\Release\TwitterInConsole.pdb
+D:\Programming\C#\Sources\TwitterInConsole\TwitterInConsole\obj\Release\TwitterInConsole.csprojResolveAssemblyReference.cache
